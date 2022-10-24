@@ -1,0 +1,160 @@
+Linux UBUNTU:
+
+# //use ghex for introspecting the files in hex
+
+export JAVA_HOME=/opt/software/java/jdks/jdk1.8.0_161/
+export PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export CLASSPATH=.:$JAVA_HOME/jre/lib
+export DAD=/home/stud/dad/lectures
+
+
+# Distributed Applications Development and System Architectures
+
+
+
+L. UNIX/Linux IPC - Inter-Process Communications and POSIX Threads - in C/C++
+cd $DAD/c01/src/S07_ipc_pthreads
+
+# // for C Linux fork(): https://www.geeksforgeeks.org/fork-system-call/
+L.1 Fork
+cd $DAD/c01/src/S07_ipc_pthreads/S01_Fork
+gcc -Wall -O2 fork1.c -o fork1
+./fork1
+g++ -Wall -O2 fork2.c -o fork2
+./fork2
+
+L.2 Signaling
+cd $DAD/c01/src/S07_ipc_pthreads/S02_Signals
+
+gcc -O2 sig1.c -o sig1
+./sig1
+# in another terminal:
+ps -a | grep sig1
+kill -SIGUSR2 PID_VALUE_nnnn
+
+gcc -O2 sig2.c -o sig2
+./sig2
+# in another terminal:
+ps -a | grep sig2
+kill -SIGUSR2 PID_VALUE_nnnn
+
+L.3. Pipes
+cd $DAD/c01/src/S07_ipc_pthreads/S03_Pipes
+
+gcc -O2 pipe0.c -o pipe0
+./pipe0
+
+gcc -O2 pipe1.c -o pipe1
+./pipe1
+
+gcc -O2 pipe2.c -o pipe0
+./pipe2
+
+gcc -O2 pipe3.c -o pipe1
+./pipe3
+
+L.4 FIFO - "Pipes with names"
+cd $DAD/c01/src/S07_ipc_pthreads/S04_Fifo
+
+Terminal 1 + 2 + 3:
+gcc -O2 speak.c -o speak
+gcc -O2 tick.c -o tick
+./speak
+./tick
+
+* in another terminal:
+rm american_maid
+
+L.5 Linux OS - System V - Message Queues
+cd $DAD/c01/src/S07_ipc_pthreads/S06_Msgqueues
+
+Terminal 1+2+3:
+gcc -O2 kirk.c -o kirk
+gcc -O2 spock.c -o spock
+./kirk
+./spock
+
+* in another terminal please see ipcs and ipcrm Commands
+ipcs -h
+ipcs 
+ipcs -q
+ipcs -q -i 0
+
+L.6 POSIX Threads - PThreads
+cd $DAD/c01/src/S07_ipc_pthreads/S12_ConcurrencyThreads
+export LD_LIBRARY_PATH=.:/usr/lib:/usr/lib/x86_64-linux-gnu/:/lib:/lib/x86_64-linux-gnu/
+
+gcc -Wall -O2 pthread1.c -o pthread1 -lpthread
+./pthread1
+
+gcc -Wall -O2 -pthread mutex_21.c -o mutex_21
+./mutex_21
+
+gcc -Wall -O2 mutex_22.c -o mutex_22 -lpthread
+./mutex_22
+
+gcc -Wall -O2 -pthread join3.c -o join3
+./join3
+
+gcc cond4.c -o cond4 -lpthread
+./cond4
+
+L.7 C++ '11/'14 Threads
+
+# http://www.bogotobogo.com/cplusplus/C11/1_C11_creating_thread.php
+
+g++ t1.cpp -o t1 -std=c++11 -pthread
+./t1
+
+
+g++ t2.cpp -o t2 -std=c++11 -pthread
+./t2
+
+
+
+----------------------------------------------------------------------------------------------
+
+
+M. Java Multi-Threading - Concurrency and Parallel (non-Lambda approach)
+cd $DAD/c01/src/S08_HPC_Threads
+
+M.1.a Not-synchronized thread
+javac eu/ase/threadsintro/FirNe2.java
+java eu/ase/threadsintro/ProgMainNeA1
+
+M.1.b Synch thread
+javac eu/ase/threadsintro/FirSi2.java
+java eu/ase/threadsintro/ProgMainSiA1
+
+M.2.a
+javac eu/ase/threadsintro/FirNe3.java
+java eu/ase/threadsintro/ProgMainNeA2
+
+M.2.b
+javac eu/ase/threadsintro/FirSi3.java
+java eu/ase/threadsintro/ProgMainSiA2
+
+M.3
+javac eu/ase/threads/Priority.java
+java eu/ase/threads/Priority
+
+M.4
+javac eu/ase/threads/ProducatorConsumator.java
+java eu/ase/threads/ProducatorConsumator
+
+M.5
+javac eu/ase/threads/ProducatorConsumator2.java
+java eu/ase/threads/ProducatorConsumator
+
+M.6
+javac eu/ase/threads/SimpleThreads.java
+java eu/ase/threads/SimpleThreads
+
+M.7 The Sum of the array items using Parallelism in Java 8 (Standard Multi-threading, Executor-Service, Future-Callable, Fork-Join)
+javac eu/ase/threads/utilparallel/*.java
+java eu/ase/threads/utilparallel/ProgMainMultiThreadParallel
+
+----------------------------------------------------------------------------------------------
+
+
+
