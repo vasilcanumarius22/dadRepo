@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.nio.ByteBuffer;
-import java.util.Random;
 
 public class UDPMulticastClient {
 	public static DatagramSocket dsocket = null;
@@ -31,7 +28,6 @@ public class UDPMulticastClient {
 		}
 	
 	public static void sender(String marks) {
-		// tries for port 2806
 		try {
 			InetAddress multicast_addr = InetAddress.getByName("239.255.255.254");
 			
