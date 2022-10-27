@@ -7,7 +7,6 @@ import java.net.MulticastSocket;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.*;
 
 public class UDPMulticastServer implements Runnable {
 	List<Integer> markStorage = new ArrayList<>();
@@ -44,7 +43,7 @@ public class UDPMulticastServer implements Runnable {
 				markStorage.add(mark);
 
 				// find max mark
-				// !! Not good enough... something with caches
+				// !! Not good enough... 
 //				Integer maxMark = 0;
 //				for (int i = 0; i < markStorage.size(); i++) {
 //					// if mark is max then print
