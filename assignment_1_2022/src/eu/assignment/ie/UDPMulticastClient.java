@@ -1,4 +1,4 @@
-// VASILCANU Marius Daniel - CSIE/IE, Master An 1, 2022
+// VASILCANU Marius Daniel - CSIE/IE, Master An 1, Gr. 1115, 2022
 package eu.assignment.ie;
 
 import java.io.IOException;
