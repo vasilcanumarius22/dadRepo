@@ -1,14 +1,10 @@
 package eu.assignment.ie;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class UDPClient_assignment_1 implements Runnable {
 	
@@ -18,25 +14,27 @@ public class UDPClient_assignment_1 implements Runnable {
 		th.start();
 	}
 	
-	public void UDPMessage (String ip_address, int port) throws IOException {
+	public void UDPMessage (String ip, int port) throws IOException {
 		// Initializing UDP parameters
-		InetAddress multicast_addr = InetAddress.getByName(ip_address); // Class D IP Address -> 224.0.0.1
-		MulticastSocket msocket = new MulticastSocket(port); // Port -> 2806
+		InetAddress multicast_addr = InetAddress.getByName("239.255.255.254"); // Class D IP Address ->
+		MulticastSocket msocket = new MulticastSocket(2806); // Port -> 2806
 		byte[] buff = new byte[256];
 		
 		// joinGroup(InetAddress groupAddr)
-		// !IMPORTANT: joinGroup now needs "Multicast Group" and "Network Interface" also
+		// !IMPORTANT: joinGroup now needs "Multicast Group" and "Network Interface" also -> deprecated since java14 ¯\_(ツ)_/¯
 		// joinGroup(group, netIf);
 		msocket.joinGroup(multicast_addr); // multicast_addr is the multicast group
 		
 		while(true) {
+			System.out.println("Hello there...");
 			// initialization and configure of DatagramPacket
-			DatagramPacket dpacket = new DatagramPacket(buff, buff.length, multicast_addr, port);
+			DatagramPacket dpacket = new DatagramPacket(buff, buff.length);
 			msocket.receive(dpacket);
 			
 			// mark reading
-			String marksInString = new String(dpacket.getData(), 0, dpacket.getLength());
-			int marksInInt = Integer.parseInt(marksInString);
+//			String marksInString = new String(dpacket.getData(), 0, dpacket.getLength());
+//			int marksInInt = Integer.parseInt(marksInString);
+			int marksInInt = Integer.parseInt(new String(dpacket.getData()).trim());			
 			
 			// creating an array to store the marks
 			List<Integer> markStorage = new ArrayList<>();
@@ -50,15 +48,14 @@ public class UDPClient_assignment_1 implements Runnable {
 					maxMark = markStorage.get(i);
 					System.out.println("Max Mark = " + maxMark);
 				}
-			}
-			
+			}		
 		}
 	}
 	
 	@Override
 	public void run() {
 		try {
-			UDPMessage("240.0.0.1", 2806);
+			UDPMessage("239.255.255.254", 2806);
         } catch(IOException e) {
             e.printStackTrace();
         }
